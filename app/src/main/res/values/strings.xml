@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">CrazyChatClub</string>
+    <string name="crazy_chat_club">Crazy Chat Club</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="new_to_crazy_chat">New to Crazy Chat?</string>
+    <string name="new_username">New Username</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="upload_profile_pic_optional">Upload Profile Pic (optional)</string>
+    <string name="create_account">Create Account</string>
 </resources>
