@@ -93,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
                         case ChatController.STATE_LISTEN:
                         case ChatController.STATE_NONE:
                             setStatus("Not connected");
+                            btnConnect.setEnabled(true);
                             break;
                     }
                     break;
