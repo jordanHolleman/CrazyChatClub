@@ -3,6 +3,7 @@ package info.devexchanges.bluetoothchatapp.ui.login;
 import android.app.Activity;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
@@ -18,6 +19,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import info.devexchanges.bluetoothchatapp.MainActivity;
 import info.devexchanges.bluetoothchatapp.R;
 import info.devexchanges.bluetoothchatapp.ui.login.LoginViewModel;
 import info.devexchanges.bluetoothchatapp.ui.login.LoginViewModelFactory;
@@ -66,6 +68,8 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 if (loginResult.getSuccess() != null) {
                     updateUiWithUser(loginResult.getSuccess());
+                    //todo show MainActivity
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
                 }
                 setResult(Activity.RESULT_OK);
 
@@ -116,7 +120,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void updateUiWithUser(LoggedInUserView model) {
-        String welcome = getString(R.string.welcome) + model.getDisplayName();
+        String welcome = getString(R.string.welcome) + " " + model.getDisplayName();
         // TODO : initiate successful logged in experience
         Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
     }
