@@ -2,7 +2,7 @@
 A simple chat app using bluetooth in Android.
 
 ## Requirements
-You will need a working version of Android Studio, and Gradle. Gradle can be updated from Android Studio if needed. Here is my software versions:
+You will need a working version of Android Studio, and Gradle. Gradle can be updated from Android Studio if needed. Here is my software versions, these will work:
 
 Android Studio 3.5.2
 
@@ -19,4 +19,4 @@ Open the Crazy Chat Club project in Android Studio. (File->Open, select CrazyCha
 
 Ensure you have a valid device or emulation connected.
 
-Press Run in Android Studio.
+Press Run in Android Studio. There may be errors such that the debugger may ask you to update Gradle. Do this, and run again.
