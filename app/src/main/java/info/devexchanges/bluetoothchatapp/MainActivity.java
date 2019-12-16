@@ -17,12 +17,16 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.Set;
+import java.util.Formatter;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -46,6 +50,9 @@ public class MainActivity extends AppCompatActivity {
     private ChatController chatController;
     private BluetoothDevice connectingDevice;
     private ArrayAdapter<String> discoveredDevicesAdapter;
+    private Formatter fmt;
+
+    private Date currentDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,17 +105,21 @@ public class MainActivity extends AppCompatActivity {
                     }
                     break;
                 case MESSAGE_WRITE:
+                    //right justify
+                    fmt = new Formatter();
                     byte[] writeBuf = (byte[]) msg.obj;
-
+                    currentDate = Calendar.getInstance().getTime();
                     String writeMessage = new String(writeBuf);
-                    chatMessages.add("Me: " + writeMessage);
+                    chatMessages.add("Me: " + fmt.format("%",writeMessage) + "\n(Sent: " + currentDate + ")");
                     chatAdapter.notifyDataSetChanged();
                     break;
                 case MESSAGE_READ:
+                    //left justify
+                    fmt = new Formatter();
                     byte[] readBuf = (byte[]) msg.obj;
-
+                    currentDate = Calendar.getInstance().getTime();
                     String readMessage = new String(readBuf, 0, msg.arg1);
-                    chatMessages.add(connectingDevice.getName() + ":  " + readMessage);
+                    chatMessages.add(connectingDevice.getName() + ":  " + fmt.format("%-", readMessage) + "\n(Received: " + currentDate + ")");
                     chatAdapter.notifyDataSetChanged();
                     break;
                 case MESSAGE_DEVICE_OBJECT:
