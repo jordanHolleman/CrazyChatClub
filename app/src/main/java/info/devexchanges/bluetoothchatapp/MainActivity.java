@@ -22,6 +22,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
@@ -46,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
     private ChatController chatController;
     private BluetoothDevice connectingDevice;
     private ArrayAdapter<String> discoveredDevicesAdapter;
+
+    private Date currentDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,14 +105,20 @@ public class MainActivity extends AppCompatActivity {
                     byte[] writeBuf = (byte[]) msg.obj;
 
                     String writeMessage = new String(writeBuf);
-                    chatMessages.add("Me: " + writeMessage);
+
+                    currentDate = Calendar.getInstance().getTime();
+
+                    chatMessages.add("Me: " + writeMessage + "\n(Sent: " + currentDate + ")");
                     chatAdapter.notifyDataSetChanged();
                     break;
                 case MESSAGE_READ:
                     byte[] readBuf = (byte[]) msg.obj;
 
                     String readMessage = new String(readBuf, 0, msg.arg1);
-                    chatMessages.add(connectingDevice.getName() + ":  " + readMessage);
+
+                    currentDate = Calendar.getInstance().getTime();
+
+                    chatMessages.add(connectingDevice.getName() + ":  " + readMessage + "\n(Received: " + currentDate + ")");
                     chatAdapter.notifyDataSetChanged();
                     break;
                 case MESSAGE_DEVICE_OBJECT:
